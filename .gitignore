@@ -4,3 +4,4 @@ __pycache__/
 .env
 wyniki.csv
 debug.html
+logs.txt

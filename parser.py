@@ -1,8 +1,8 @@
-from utils import clean_liczba, clean_ocena
+from utils import clean_number, clean_rating
 
 
 def parse_products(soup):
-    produkty = []
+    products = []
 
     for row in soup.select("div.cat-prod-row"):
         name = row.select_one("strong.cat-prod-row__name span")
@@ -10,16 +10,16 @@ def parse_products(soup):
         reviews = row.select_one("span.prod-review__qo a")
         purchased = row.select_one("span.recently-purchased__level")
 
-        produkty.append(
+        products.append(
             {
-                "nazwa": name.get_text(strip=True) if name else None,
-                "ocena": clean_ocena(score.get_text(strip=True) if score else None),
-                "recenzje": clean_liczba(
+                "name": name.get_text(strip=True) if name else None,
+                "rating": clean_rating(score.get_text(strip=True) if score else None),
+                "reviews": clean_number(
                     reviews.get_text(strip=True) if reviews else None
                 ),
-                "kupione_ostatnio": clean_liczba(
+                "purchesed_recently": clean_number(
                     purchased.get_text(strip=True) if purchased else None
                 ),
             }
         )
-    return produkty
+    return products

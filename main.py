@@ -1,15 +1,25 @@
 import csv
 from scraper import get_soup
 from parser import parse_products
+import logging
 
 soup = get_soup()
-produkty = parse_products(soup)
+products = parse_products(soup)
 
-with open("wyniki.csv", "w", newline="", encoding="utf-8-sig") as f:
+with open("results.csv", "w", newline="", encoding="utf-8-sig") as f:
     writer = csv.DictWriter(
-        f, fieldnames=["nazwa", "ocena", "recenzje", "kupione_ostatnio"]
+        f, fieldnames=["name", "rating", "reviews", "purchesed_recently"]
     )
     writer.writeheader()
-    writer.writerows(produkty)
+    writer.writerows(products)
 
-print(f"Zapisano {len(produkty)} produktów do wyniki.csv")
+logging.basicConfig(
+    filename="logs.txt",
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    encoding="utf-8",
+)
+
+logging.info(f"Saved {len(products)} products to results.csv")
+
+print("Scraping finished.")
