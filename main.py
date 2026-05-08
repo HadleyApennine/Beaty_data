@@ -22,4 +22,4 @@ logging.basicConfig(
 
 logging.info(f"Saved {len(products)} products to results.csv")
 
-print("Scraping finished.")
+print(f"Scraping finished, succesfully scraped {len(products)} items.")
