@@ -31,34 +31,35 @@ Ceneo-scraper
 
 ### How to run
 
-1. Clone the repository:
+Dockerfile file was put inside repo - on the same level as main.py <br>
+
+1. Build the Docker image:
 
 ```bash
-   git clone https://github.com/HadleyApennine/Ceneo-scraper
-   cd https://github.com/HadleyApennine/Ceneo-scraper
+   docker build -t python-scraper .
 ```
 
    <br>
-2. Create and activate a virtual environment:
+2. Run the container (basic):
 
 ```bash
-   python -m venv .venv
-   .venv\Scripts\activate # Windows
-   source .venv/bin/activate # Mac/Linux
+   docker run --rm python-scraper
 ```
 
    <br>
-3. Install dependencies:
+3. Run interactively (for debugging) - it runs the script and put you inside the docker command line:
 
 ```bash
-   pip install -r requirements.txt
+   docker run --rm -it python-scraper /bin/bash
+
 ```
 
    <br>
-4. Run the scraper:
+4.  in case there would be some folder sharing it - for example to put results.csv file outside container it would look like that (not tested by me, but tough demonstration how to do folder sharing between host and container):
 
 ```bash
-   python main.py
+   docker run -v HOST-DIRECTORY:/CONTAINER-DIRECTORY:rw --rm python-scraper
+
 ```
 
    <br>
